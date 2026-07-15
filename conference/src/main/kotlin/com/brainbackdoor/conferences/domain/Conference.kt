@@ -17,7 +17,7 @@ class Conference(
     @JoinColumn(foreignKey = ForeignKey(name = "fk_conference_to_recruitment"))
     var recruitment: Recruitment,
 
-    @Lob
+    @Column(columnDefinition = "longtext")
     var contents: String = "",
 
 

@@ -3,13 +3,13 @@ server:
 
 external:
   conference:
-    host: http://localhost:8082
+    host: http://myunghoon-conference-alb-1395603225.ap-northeast-2.elb.amazonaws.com
   login-member:
-    host: http://localhost:8084
+    host: http://myunghoon-member-alb-973600884.ap-northeast-2.elb.amazonaws.com
   analysis:
-    host: http://localhost:8083
+    host: http://myunghoon-analysis-alb-174906274.ap-northeast-2.elb.amazonaws.com
   event:
-    host: http://localhost:8082
+    host: http://myunghoon-conference-alb-1395603225.ap-northeast-2.elb.amazonaws.com
 
 auth:
   secret-key: secret-key
