@@ -55,14 +55,10 @@ class Member(
         consentByMember,
         consentByPrivacy,
         mutableListOf(role)
-    )
-
-    init {
-        password
-            ?.isMatched(this.email.address)
-            ?.let {
-                check(it) { throw IllegalArgumentException("이용자 ID를 이용한 패스워드는 사용할 수 없습니다.") }
-            }
+    ) {
+        check(password != email) {
+            throw IllegalArgumentException("이용자 ID를 이용한 패스워드는 사용할 수 없습니다.")
+        }
     }
 
     fun checkPassword(password: String) {

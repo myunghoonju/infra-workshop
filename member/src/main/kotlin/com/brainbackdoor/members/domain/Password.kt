@@ -29,10 +29,6 @@ class Password(
 
     private fun validateCombination(password: String): Boolean = PASSWORD_COMBINATION_REGEX.matches(password)
 
-    fun isMatched(value: String): Boolean {
-        return ENCODER.matches(value, this.password).not()
-    }
-
     companion object {
         private val PASSWORD_COMBINATION_REGEX =
             "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[\$@\$!%*#?&.])[A-Za-z\\d\$@\$!%*#?&.]{8,20}\$".toRegex()

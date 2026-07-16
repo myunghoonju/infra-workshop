@@ -6,12 +6,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.mail.javamail.MimeMessagePreparator
+import org.springframework.scheduling.annotation.Async
 
 open class Mail(
     private val javaMailSender: JavaMailSender,
     private val mailProperties: MailProperties
 ) : Notification {
-    // @Async
+    @Async
     override fun send(recipient: String, subject: String, contents: String) {
         send(listOf(recipient), subject, contents)
     }

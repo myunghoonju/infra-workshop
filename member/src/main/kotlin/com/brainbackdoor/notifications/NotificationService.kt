@@ -10,7 +10,7 @@ class NotificationService(
     private val notification: Notification
 ) {
 
-    // @EventListener
+    @EventListener
     fun send(event : SendMailEvent) {
         logger.debug { "SendMailEvent happened!! $event" }
 

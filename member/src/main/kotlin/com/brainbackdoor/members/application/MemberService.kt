@@ -8,9 +8,9 @@ import com.brainbackdoor.members.domain.RoleRepository
 import com.brainbackdoor.members.domain.RoleType
 import com.brainbackdoor.members.web.MemberCreateRequest
 import com.brainbackdoor.members.web.MemberResponse
-import com.brainbackdoor.notifications.NotificationService
 import com.brainbackdoor.notifications.SendMailEvent
 import jakarta.transaction.Transactional
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 
 @Service
@@ -18,8 +18,7 @@ import org.springframework.stereotype.Service
 class MemberService(
     private val memberRepository: MemberRepository,
     private val roleRepository: RoleRepository,
-    private val notificationService: NotificationService,
-    // private val eventPublisher: ApplicationEventPublisher
+    private val eventPublisher: ApplicationEventPublisher
 ) {
     fun create(request: MemberCreateRequest): MemberResponse {
         check(request.consentByMember && request.consentByPrivacy) {
@@ -27,8 +26,7 @@ class MemberService(
         }
 
         val member = create(request.of())
-        notificationService.send(SendMailEvent(request.email, MAIL_SUBJECTS, MAIL_CONTENTS))
-        // eventPublisher.publishEvent(SendMailEvent(request.email, MAIL_SUBJECTS, MAIL_CONTENTS))
+        eventPublisher.publishEvent(SendMailEvent(request.email, MAIL_SUBJECTS, MAIL_CONTENTS))
         return MemberResponse(member)
     }
 
